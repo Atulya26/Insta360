@@ -1,0 +1,26 @@
+360° Image Placeholder
+
+This file indicates where you should place your 360° panoramic image.
+
+REQUIREMENTS:
+- Format: JPG, PNG, or WebP
+- Projection: Equirectangular (2:1 aspect ratio)
+- Recommended size: 4096x2048 or 8192x4096
+- File size: Keep under 10MB for optimal performance
+
+INSTRUCTIONS:
+1. Replace this file with your 360° image
+2. Rename it to: 360-image.jpg
+3. Or update the filename in index.html
+
+EXAMPLE:
+- Place your image in this folder
+- Rename to: 360-image.jpg
+- The A-Frame scene will automatically load it
+
+SUPPORTED FORMATS:
+- JPG (recommended for photos)
+- PNG (good for graphics)
+- WebP (modern, efficient)
+
+For help, see the main README.md file.

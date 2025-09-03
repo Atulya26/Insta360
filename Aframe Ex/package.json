@@ -1,0 +1,36 @@
+{
+  "name": "aframe-360-experience",
+  "version": "1.0.0",
+  "description": "A-Frame 360° Image Experience - A web-based panoramic image viewer",
+  "main": "index.html",
+  "scripts": {
+    "start": "five-server --port=8000",
+    "dev": "five-server --port=8000 --open",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "aframe",
+    "360",
+    "panorama",
+    "vr",
+    "webxr",
+    "threejs"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "five-server": "^1.0.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-repository-url"
+  },
+  "bugs": {
+    "url": "your-repository-url/issues"
+  },
+  "homepage": "your-repository-url#readme"
+}
