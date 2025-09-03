@@ -1,131 +1,43 @@
-# A-Frame 360° Image Experience
+# Quick 360 Viewer (A-Frame)
 
-A web-based 360° image viewer built with A-Frame that allows users to explore panoramic images in an immersive 3D environment.
+Paste any direct 360 image or video URL and view it instantly in the browser. Designed for static hosting (Vercel, GitHub Pages, Netlify).
 
-## Features
+- A-Frame 1.7.0 (CDN) — per docs: https://aframe.io/docs/1.7.0/introduction/installation.html
+- Static HTML/JS/CSS only — no build step
+- Query params supported: `?src=...&type=image|video|auto`
 
-- 360° panoramic image viewing
-- Mouse controls for looking around
-- Loading screen with progress indication
-- Information panel with instructions
-- Keyboard shortcuts for enhanced interaction
-- Responsive design for different screen sizes
-- VR-ready (WebXR compatible)
-
-## Setup Instructions
-
-### 1. Add Your 360° Image
-
-1. Place your 360° image file in the `assets/` folder
-2. Rename it to `360-image.jpg` (or update the filename in `index.html`)
-3. Supported formats: JPG, PNG, WebP
-
-**Note:** For best results, use equirectangular projection images with 2:1 aspect ratio (e.g., 4096x2048, 8192x4096).
-
-### 2. Run Locally
-
-#### Option 1: Using Python (Recommended)
+## Run locally
 ```bash
-# Python 3
-python -m http.server 8000
-
-# Python 2
-python -m SimpleHTTPServer 8000
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-#### Option 2: Using Node.js
-```bash
-# Install five-server globally
-npm install -g five-server@latest
+## Deploy to Vercel
+- Framework Preset: Other
+- Build Command: (leave empty)
+- Output Directory: (leave empty)
+- Root Directory: `./`
+- `vercel.json` routes `/` to `/index.html`
 
-# Run the server
-five-server --port=8000
-```
+## Usage
+1. Paste a direct URL to a 360 equirectangular image (`.jpg/.png/.webp`) or video (`.mp4/.webm`).
+2. Click Load. Look around with mouse or touch.
+3. Or open with query params, e.g.:
+   - `https://your-app.vercel.app/?src=https://example.com/pano.jpg`
+   - `https://your-app.vercel.app/?src=https://example.com/pano.mp4&type=video`
 
-#### Option 3: Using Live Server (VS Code Extension)
-1. Install the "Live Server" extension in VS Code
-2. Right-click on `index.html` and select "Open with Live Server"
+## Google Drive links
+Drive sharing pages are converted to a direct download URL automatically. If the file’s sharing or CORS settings don’t allow cross-origin access, the browser will block it. Prefer a host that serves the file with CORS headers.
 
-### 3. Access Your Experience
+## CORS notes
+- The remote file must be served with `Access-Control-Allow-Origin: *` (or your origin) for the browser to load it as a texture or video.
+- Many cloud drives and CDNs allow this; some don’t. If it fails, try hosting the asset on a static bucket (S3/Cloudflare R2/GCS) with CORS enabled.
 
-Open your browser and navigate to:
-- **Python/Node.js**: `http://localhost:8000`
-- **Live Server**: Usually `http://localhost:5500`
-
-## Controls
-
-- **Mouse**: Click and drag to look around
-- **R key**: Reset camera rotation
-- **F key**: Toggle fullscreen mode
-- **Click on info panel**: Toggle visibility
-
-## File Structure
-
-```
-├── index.html          # Main HTML file with A-Frame scene
-├── styles.css          # Custom CSS styling
-├── script.js           # JavaScript for interactivity
-├── assets/             # Directory for your 360° images
-│   └── 360-image.jpg  # Your 360° image (add this)
-└── README.md           # This file
-```
-
-## Customization
-
-### Changing the 360° Image
-Update the `src` attribute in the `<a-sky>` element in `index.html`:
-```html
-<a-sky src="assets/your-image-name.jpg" rotation="0 -90 0"></a-sky>
-```
-
-### Adjusting Camera Controls
-Modify the camera attributes in `index.html`:
-```html
-<a-camera 
-  look-controls="reverseMouseDrag: true; sensitivity: 0.5" 
-  wasd-controls="enabled: false">
-</a-camera>
-```
-
-### Adding Hotspots
-You can add interactive hotspots by adding `<a-sphere>` or `<a-box>` entities with click events.
-
-## Browser Compatibility
-
-- **Chrome**: Full support
-- **Firefox**: Full support
-- **Safari**: Full support
-- **Edge**: Full support
-- **Mobile browsers**: Touch controls supported
-
-## VR Support
-
-The experience is VR-ready and will work with:
-- WebXR-compatible browsers
-- VR headsets (Oculus Quest, HTC Vive, etc.)
-- Mobile VR viewers (Google Cardboard, etc.)
-
-## Troubleshooting
-
-### Image Not Loading
-1. Check that the image file exists in the `assets/` folder
-2. Verify the filename matches exactly (case-sensitive)
-3. Ensure the image is a valid 360° equirectangular format
-
-### Controls Not Working
-1. Make sure you're running from a local server (not `file://` protocol)
-2. Check browser console for JavaScript errors
-3. Try refreshing the page
-
-### Performance Issues
-1. Optimize your 360° image size (recommended: 4096x2048 or smaller)
-2. Use compressed image formats (JPG for photos, PNG for graphics)
-3. Close other browser tabs to free up memory
+## Files
+- `index.html` — form and scene
+- `script.js` — URL handling and dynamic A-Frame entities
+- `styles.css` — minimal responsive UI
+- `vercel.json` — static rewrite to `index.html`
 
 ## License
-
-This project is open source and available under the MIT License.
-
-## Credits
-
-Built with [A-Frame](https://aframe.io/) - A web framework for building virtual reality experiences.
+MIT

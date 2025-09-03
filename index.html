@@ -1,69 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>A-Frame 360° Image Experience</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A-Frame 360° Image Experience">
-    
-    <!-- A-Frame CDN -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quick 360 Viewer • A-Frame</title>
     <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
-    
-    <!-- Custom styles -->
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-    <a-scene>
-      <!-- 360° Image Background -->
-      <a-sky src="assets/360-image.jpg" rotation="0 -90 0"></a-sky>
-      
-      <!-- Camera with controls -->
-      <a-camera look-controls="reverseMouseDrag: true" wasd-controls="enabled: false">
-        <!-- Cursor for interaction -->
-        <a-cursor color="#FFFFFF" position="0 0 -1"></a-cursor>
-      </a-camera>
-      
-      <!-- Ambient light for better visibility -->
-      <a-light type="ambient" color="#FFFFFF" intensity="0.5"></a-light>
-      
-      <!-- Information panel -->
-      <a-plane 
-        position="0 2 -3" 
-        width="2" 
-        height="0.5" 
-        color="#000000" 
-        opacity="0.7"
-        material="transparent: true">
-        <a-text 
-          value="360° Image Experience\nUse mouse to look around" 
-          align="center" 
-          color="#FFFFFF" 
-          position="0 0 0.01"
-          scale="0.5 0.5 1">
-        </a-text>
-      </a-plane>
-      
-      <!-- Loading screen -->
-      <a-entity id="loading-screen">
-        <a-plane 
-          position="0 0 -2" 
-          width="4" 
-          height="2" 
-          color="#000000" 
-          opacity="0.8"
-          material="transparent: true">
-          <a-text 
-            value="Loading 360° Image..." 
-            align="center" 
-            color="#FFFFFF" 
-            position="0 0 0.01"
-            scale="1 1 1">
-          </a-text>
-        </a-plane>
+    <header class="app-header">
+      <h1>Quick 360 Viewer</h1>
+      <p>Paste a direct URL to a 360 image (equirectangular) or video.</p>
+      <form id="src-form">
+        <input id="src-input" type="url" placeholder="https://example.com/your-360.jpg or .mp4" required>
+        <select id="type-input">
+          <option value="auto" selected>Auto detect</option>
+          <option value="image">Image</option>
+          <option value="video">Video</option>
+        </select>
+        <button type="submit">Load</button>
+      </form>
+      <small id="help-text">Tip: Many providers require direct file URLs with CORS enabled.</small>
+    </header>
+
+    <a-scene renderer="colorManagement: true" embedded>
+      <a-entity id="sky-container"></a-entity>
+      <a-entity id="cameraRig">
+        <a-camera look-controls wasd-controls="enabled: false"></a-camera>
       </a-entity>
+      <a-entity light="type: ambient; intensity: 0.7"></a-entity>
     </a-scene>
-    
-    <!-- Custom JavaScript -->
+
+    <footer class="app-footer">
+      <span id="status">Idle</span>
+    </footer>
+
     <script src="script.js"></script>
   </body>
 </html>
