@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A-Frame 360° Image Experience</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A-Frame 360° Image Experience">
+    
+    <!-- A-Frame CDN -->
+    <script src="https://aframe.io/releases/1.7.0/aframe.min.js"></script>
+    
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a-scene>
+      <!-- 360° Image Background -->
+      <a-sky src="assets/360-image.jpg" rotation="0 -90 0"></a-sky>
+      
+      <!-- Camera with controls -->
+      <a-camera look-controls="reverseMouseDrag: true" wasd-controls="enabled: false">
+        <!-- Cursor for interaction -->
+        <a-cursor color="#FFFFFF" position="0 0 -1"></a-cursor>
+      </a-camera>
+      
+      <!-- Ambient light for better visibility -->
+      <a-light type="ambient" color="#FFFFFF" intensity="0.5"></a-light>
+      
+      <!-- Information panel -->
+      <a-plane 
+        position="0 2 -3" 
+        width="2" 
+        height="0.5" 
+        color="#000000" 
+        opacity="0.7"
+        material="transparent: true">
+        <a-text 
+          value="360° Image Experience\nUse mouse to look around" 
+          align="center" 
+          color="#FFFFFF" 
+          position="0 0 0.01"
+          scale="0.5 0.5 1">
+        </a-text>
+      </a-plane>
+      
+      <!-- Loading screen -->
+      <a-entity id="loading-screen">
+        <a-plane 
+          position="0 0 -2" 
+          width="4" 
+          height="2" 
+          color="#000000" 
+          opacity="0.8"
+          material="transparent: true">
+          <a-text 
+            value="Loading 360° Image..." 
+            align="center" 
+            color="#FFFFFF" 
+            position="0 0 0.01"
+            scale="1 1 1">
+          </a-text>
+        </a-plane>
+      </a-entity>
+    </a-scene>
+    
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+  </body>
+</html>
