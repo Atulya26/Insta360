@@ -3,7 +3,48 @@ html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, Seg
 
 .app-header { padding: 12px 16px; background:#111; border-bottom:1px solid #222; position: sticky; top: 0; z-index: 10; }
 .app-header h1 { margin: 0 0 6px 0; font-size: 18px; }
-.app-header p { margin: 0 0 8px 0; color:#aaa; font-size: 13px; }
+.app-header p { margin: 0 0 16px 0; color:#aaa; font-size: 13px; }
+
+/* Upload Section */
+.upload-section { margin-bottom: 20px; }
+.upload-zone { 
+  border: 2px dashed #444; 
+  border-radius: 8px; 
+  padding: 24px; 
+  text-align: center; 
+  cursor: pointer; 
+  transition: all 0.2s ease;
+  background: #1a1a1a;
+}
+.upload-zone:hover { border-color: #666; background: #222; }
+.upload-zone.dragover { border-color: #3a86ff; background: #1a2a3a; }
+.upload-zone.dragover .upload-icon { color: #3a86ff; }
+
+.upload-content { pointer-events: none; }
+.upload-icon { width: 48px; height: 48px; color: #666; margin-bottom: 12px; }
+.upload-zone p { margin: 4px 0; color: #ccc; }
+.upload-subtitle { font-size: 12px; color: #888; }
+
+.file-info { 
+  margin-top: 12px; 
+  padding: 12px; 
+  background: #1a1a1a; 
+  border-radius: 6px; 
+  border: 1px solid #333;
+}
+.file-details { display: flex; gap: 12px; margin-bottom: 8px; font-size: 12px; }
+.file-name { color: #e6e6e6; font-weight: 500; }
+.file-size { color: #888; }
+.file-type { color: #3a86ff; text-transform: uppercase; }
+.load-btn, .clear-btn { padding: 6px 12px; border-radius: 4px; border: 1px solid #333; font-size: 12px; cursor: pointer; margin-right: 8px; }
+.load-btn { background: #3a86ff; color: #fff; border-color: #3a86ff; }
+.load-btn:hover { background: #2f6fd1; }
+.clear-btn { background: #333; color: #ccc; }
+.clear-btn:hover { background: #444; }
+
+/* URL Section */
+.url-section { margin-top: 16px; padding-top: 16px; border-top: 1px solid #333; }
+.url-section h3 { margin: 0 0 8px 0; font-size: 14px; color: #ccc; }
 
 #src-form { display: flex; gap: 8px; }
 #src-input { flex: 1; padding: 10px 12px; border-radius: 6px; border:1px solid #333; background:#1a1a1a; color:#e6e6e6; }
@@ -13,10 +54,11 @@ button:hover { background:#2f6fd1; }
 #help-text { display:block; margin-top: 6px; color:#888; }
 
 /* Scene occupies remaining viewport height */
-a-scene { height: calc(100vh - 130px); }
+a-scene { height: calc(100vh - 280px); }
 @media (max-width: 640px) {
   #src-form { flex-direction: column; }
-  a-scene { height: calc(100vh - 170px); }
+  .file-details { flex-direction: column; gap: 4px; }
+  a-scene { height: calc(100vh - 320px); }
 }
 
 .app-footer { position: fixed; bottom: 0; left: 0; right: 0; background:#111; border-top:1px solid #222; padding: 8px 16px; font-size: 12px; color:#aaa; }

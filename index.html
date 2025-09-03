@@ -10,17 +10,48 @@
   <body>
     <header class="app-header">
       <h1>Quick 360 Viewer</h1>
-      <p>Paste a direct URL to a 360 image (equirectangular) or video.</p>
-      <form id="src-form">
-        <input id="src-input" type="url" placeholder="https://example.com/your-360.jpg or .mp4" required>
-        <select id="type-input">
-          <option value="auto" selected>Auto detect</option>
-          <option value="image">Image</option>
-          <option value="video">Video</option>
-        </select>
-        <button type="submit">Load</button>
-      </form>
-      <small id="help-text">Tip: Many providers require direct file URLs with CORS enabled.</small>
+      <p>Upload a 360° image/video or paste a direct URL</p>
+      
+      <!-- File Upload Section -->
+      <div class="upload-section">
+        <div class="upload-zone" id="upload-zone">
+          <div class="upload-content">
+            <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7,10 12,15 17,10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <p>Drag & drop 360° image/video here</p>
+            <p class="upload-subtitle">or click to browse</p>
+            <input type="file" id="file-input" accept="image/*,video/*" style="display: none;">
+          </div>
+        </div>
+        
+        <div class="file-info" id="file-info" style="display: none;">
+          <div class="file-details">
+            <span class="file-name" id="file-name"></span>
+            <span class="file-size" id="file-size"></span>
+            <span class="file-type" id="file-type"></span>
+          </div>
+          <button type="button" id="load-file-btn" class="load-btn">Load in Viewer</button>
+          <button type="button" id="clear-file-btn" class="clear-btn">Clear</button>
+        </div>
+      </div>
+
+      <!-- URL Input Section -->
+      <div class="url-section">
+        <h3>Or paste a direct URL:</h3>
+        <form id="src-form">
+          <input id="src-input" type="url" placeholder="https://example.com/your-360.jpg or .mp4" required>
+          <select id="type-input">
+            <option value="auto" selected>Auto detect</option>
+            <option value="image">Image</option>
+            <option value="video">Video</option>
+          </select>
+          <button type="submit">Load URL</button>
+        </form>
+        <small id="help-text">Note: Many providers require CORS-enabled direct file URLs</small>
+      </div>
     </header>
 
     <a-scene renderer="colorManagement: true" embedded>
@@ -32,7 +63,7 @@
     </a-scene>
 
     <footer class="app-footer">
-      <span id="status">Idle</span>
+      <span id="status">Ready to upload or paste URL</span>
     </footer>
 
     <script src="script.js"></script>
