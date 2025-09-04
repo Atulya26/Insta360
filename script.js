@@ -69,39 +69,28 @@
     setStatus('Ready to upload or paste URL');
   }
 
-  function loadFile(file) {
-    if (!file) return;
-    
-    clearMedia();
-    setStatus('Processing file...');
-
-    // Create blob URL for the file
-    currentBlobUrl = URL.createObjectURL(file);
-    
-    // Determine if it's a video or image
-    const isVideo = file.type.startsWith('video/');
-    
-    if (isVideo) {
-      loadVideoFromBlob(currentBlobUrl, file.name);
-    } else {
-      loadImageFromBlob(currentBlobUrl, file.name);
-    }
+  function clearMedia() {
+    while (skyContainer.firstChild) skyContainer.removeChild(skyContainer.firstChild);
   }
 
   function loadImageFromBlob(blobUrl, filename) {
+    console.log('Loading image from blob:', blobUrl);
     const sky = document.createElement('a-sky');
     sky.setAttribute('src', blobUrl);
     sky.setAttribute('rotation', '0 -90 0');
     
     sky.addEventListener('load', () => {
+      console.log('Image loaded successfully');
       setStatus(`Loaded: ${filename}`);
     });
     
-    sky.addEventListener('error', () => {
+    sky.addEventListener('error', (e) => {
+      console.error('Image load error:', e);
       setStatus('Failed to load image');
       alert('Failed to load the image. Please try a different file.');
     });
     
+    console.log('Appending sky to container:', skyContainer);
     skyContainer.appendChild(sky);
   }
 
@@ -140,12 +129,39 @@
     setStatus('Buffering video...');
   }
 
+  function loadFile(file) {
+    if (!file) return;
+    
+    console.log('Loading file:', file.name, file.type, file.size);
+    clearMedia();
+    setStatus('Processing file...');
+
+    // Create blob URL for the file
+    currentBlobUrl = URL.createObjectURL(file);
+    console.log('Created blob URL:', currentBlobUrl);
+    
+    // Determine if it's a video or image
+    const isVideo = file.type.startsWith('video/');
+    console.log('Is video:', isVideo);
+    
+    if (isVideo) {
+      loadVideoFromBlob(currentBlobUrl, file.name);
+    } else {
+      loadImageFromBlob(currentBlobUrl, file.name);
+    }
+  }
+
   // File input change handler
   fileInput.addEventListener('change', (e) => {
+    console.log('File input changed');
     const file = e.target.files[0];
+    console.log('Selected file:', file);
     if (file && validateFile(file)) {
+      console.log('File validated successfully');
       displayFileInfo(file);
       setStatus('File selected. Click "Load in Viewer" to view.');
+    } else {
+      console.log('File validation failed');
     }
   });
 
@@ -220,10 +236,6 @@
       return `https://drive.google.com/uc?export=download&id=${idParam}`;
     }
     return url;
-  }
-
-  function clearMedia() {
-    while (skyContainer.firstChild) skyContainer.removeChild(skyContainer.firstChild);
   }
 
   function loadMedia(src, forcedType) {
