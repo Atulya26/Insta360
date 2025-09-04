@@ -308,6 +308,34 @@
     loadMedia(qsSrc, qsType);
   }
 
+  // Initialize and debug
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, checking elements...');
+    console.log('Upload zone:', uploadZone);
+    console.log('File input:', fileInput);
+    console.log('Sky container:', skyContainer);
+    console.log('Load file button:', loadFileBtn);
+    
+    // Check if A-Frame is loaded
+    if (typeof AFRAME !== 'undefined') {
+      console.log('A-Frame loaded successfully');
+    } else {
+      console.error('A-Frame not loaded!');
+    }
+    
+    // Make functions available globally for debugging
+    window.debug360 = {
+      loadFile,
+      clearMedia,
+      loadImageFromBlob,
+      loadVideoFromBlob,
+      setStatus,
+      currentFile,
+      currentBlobUrl
+    };
+    console.log('Debug functions available as window.debug360');
+  });
+
   // Cleanup on page unload
   window.addEventListener('beforeunload', () => {
     if (currentBlobUrl) {
